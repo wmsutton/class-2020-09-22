@@ -40,8 +40,11 @@ sep_old <-
          title = course_title,
          name = course_name,
          department = course_department) %>% 
-  filter(u_grad > 10)
-
+  filter(u_grad > 10) %>%
+  group_by(id, title) %>%
+  summarize(ugrad_sum = sum(u_grad), .groups = "drop") %>%
+  arrange(title)
+  
 # But this is not correct! Look for Gov 50: Data. What do you see? What can you
 # do to clean it up?
 ```
@@ -50,8 +53,24 @@ sep_old <-
 ### Scene 1
 
 **Prompt:** Read in and clean the new data, creating an object called `sep_new`. 
+```{r}
+sep_new <- 
+  read_excel("new_data/class_enrollment_summary_by_term_9-22-2020.xlsx", 
+             skip = 3) %>%
+  clean_names() %>% 
+  filter(! is.na(course_title)) %>% 
+  select(-grad, -non_degree, -x_reg, -vus, -employee, 
+         -withdraw, -total, -instructor_full_name, -course_section_code) %>%
+  rename(id = course_id,
+         title = course_title,
+         name = course_name,
+         department = course_department) %>% 
+  filter(u_grad > 10) %>%
+  group_by(id, title, department, name) %>%
+  summarize(ugrad_sum = sum(u_grad), .groups = "drop") %>%
+  arrange(title)
 
-
+```
 
 ### Scene 2
 
@@ -59,12 +78,19 @@ sep_old <-
 
 
 Before we start on the model, Wisdom suggests we should:
-
-
+* Defining our outcomes of interest: ugrad_sum in sep_old, and ugrad_sum in
+  sep_new
+* We are not considering factors that may affect enrollment other than time
+* We already threw out duplicate rows
 
 
 After we have a model, Temperance suggests we should:
-
+* Acknowledge that this year is very different than other years due to COVID-19, 
+  which would affect the external validity (we probably can't generalize this
+  across years)
+* This enrollment data only looks at students currently enrolled; many 
+  undergraduates are on leave.  A fuller undergrad population may behave 
+  differently.
 
 
 ### Scene 3
