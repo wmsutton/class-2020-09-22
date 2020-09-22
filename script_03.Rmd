@@ -6,7 +6,7 @@ output: html_document
 
 Go to https://registrar.fas.harvard.edu/faculty-staff/courses/enrollment and scroll down to "Access the Current Course Enrollment Numbers." Click on that to download the Excel file. Create a folder in your project called `new_data`. Move the Excel file into that folder. Note that, even if you did this last week, you are doing it again because Harvard has updated the file. The file might be dated either September 21 or 22. We won't know till class!
 
-Note that I have already created a directory called "old_data" and included the file from September 1 in it, along with other data which I have collected. Because I am your buddy, I even give you the code for reading it in! (Although I did leave one mistake for you to find . . .)
+Note that I have already created a directory called `old_data` and included the file from September 1 in it, along with other data which I have collected. Because I am your buddy, I even give you the code for reading it in! (Although I did leave one mistake for you to find . . .)
 
 Load **tidyverse**, **readxl* and **janitor** into your setup chunk.
 
@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Scene 0
 
-**Prompt:**  First, figure out what is wrong with the `sep_old` object. Edit the above code to fix it.
+**Prompt:**  First, figure out what is wrong with the `sep_old` object. Edit the code below to fix it. Read the comments for hints.
 
 ```{r sc0}
 # Most groups got something like this going last week. Note the use of skip = 3
@@ -47,8 +47,6 @@ sep_old <-
 ```
 
 
-
-
 ### Scene 1
 
 **Prompt:** Read in and clean the new data, creating an object called `sep_new`. 
@@ -57,9 +55,12 @@ sep_old <-
 
 ### Scene 2
 
-**Prompt:** Dean Amanda Claybaugh is concerned about the drop in undergradaute enrollment in some courses between September 1 and today. She wants you to analyze this issue. Before you dive into the details, provide some bullet points as to how Wisdom and Temperance apply to this situation. Every student should have several bullet points. Someone will be asked to share their screen and discuss.
+**Prompt:** Dean Amanda Claybaugh is concerned about the drop in undergraduate enrollment in some courses between September 1 and today. She wants you to analyze this issue. Before you dive into the details, provide some bullet points as to how Wisdom and Temperance apply to this situation. Every student should have several bullet points. Someone may be asked to share their screen and discuss. Refer to the Chapter 3 discussions about these Cardinal Virtues. Open it up in your browser.
+
 
 Before we start on the model, Wisdom suggests we should:
+
+
 
 
 After we have a model, Temperance suggests we should:
